@@ -92,14 +92,11 @@ AUTH_USER_MODEL = 'api.User'
 
 # ALLOWED_HOSTS = ['127.0.0.1']
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'veriblaster', 
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'PORT': os.environ.get('POSTGRES_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'veribdb', 
     }
 }
 
