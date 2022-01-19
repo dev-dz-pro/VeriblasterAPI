@@ -1,3 +1,5 @@
-*/env-veribApi
+__pycache__
+*.pyc
+env-veribApi/
 script.py
 veribdb
