@@ -8,4 +8,10 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD [ "gunicorn", "--bind", ":8000", "--workers", "4", "veriblaster.wsgi:application" ]
+# Work on all accept heruko 
+# EXPOSE 8000
+
+# CMD [ "gunicorn", "--bind", ":8000", "--workers", "4", "veriblaster.wsgi:application" ]
+
+# Work for heruko
+CMD gunicorn veriblaster.wsgi:application --bind 0.0.0.0:$PORT 
