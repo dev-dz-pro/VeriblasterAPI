@@ -1,3 +1,4 @@
-/script.py
 /env-veribApi
 /db.mysqlite3
+/XtraTest
+*pyc
