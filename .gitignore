@@ -1,4 +1,7 @@
-/env-veribApi
-/db.mysqlite3
-/XtraTest
-*pyc
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.mysqlite3
+env-veribApi/
+XtraTest/
