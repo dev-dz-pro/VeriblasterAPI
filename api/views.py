@@ -18,13 +18,13 @@ class RegisterView(views.APIView):
         serializer = self.class_serializer(data=request.data)
         if serializer.is_valid():
             machine_uid = serializer.validated_data.pop('machine_uid', None)
-            user = serializer.save()
+            if Subscription.objects.filter(machine_uid=machine_uid).exists():
+                return Response({'detail': 'You already have a subscription for this machine, Please login from your registred account.'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                user = serializer.save()
             if user:
-                try:
-                    Subscription.objects.create(user=user, machine_uid=machine_uid)
-                    return Response({"message": "Registred successfuly"}, status=status.HTTP_201_CREATED)
-                except IntegrityError:
-                    return Response({'message': 'You already signed up with this machine, kindly use you registred account or contact us.'}, status=status.HTTP_400_BAD_REQUEST)
+                Subscription.objects.create(user=user, machine_uid=machine_uid)
+                return Response({"message": "Registred successfuly"}, status=status.HTTP_201_CREATED)
             else:
                 return Response({'message': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -170,7 +170,6 @@ class AddNewMachineView(views.APIView):
         if serializer.is_valid():
             validated_data = serializer.validated_data
             try:
-                print(validated_data["machine_uid"])
                 Subscription.objects.create(user=request.user, machine_uid=validated_data["machine_uid"])
                 return Response({"message": "New Machine added successfully."}, status=status.HTTP_201_CREATED)
             except IntegrityError:

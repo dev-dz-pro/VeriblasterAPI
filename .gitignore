@@ -1,7 +1,7 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
+*/__pycache__/
 db.mysqlite3
 env-veribApi/
 XtraTest/
